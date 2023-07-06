@@ -1,7 +1,7 @@
 use serde_json::{ Value };
 use extendr_api::prelude::*;
 
-fn extract_json_value(value: &Value) -> Robj {
+pub fn extract_json_value(value: &Value) -> Robj {
     if value.is_object() {
         let cur_entry = value.as_object().unwrap();
         let keys = cur_entry.keys();
@@ -49,7 +49,7 @@ fn extract_json_value(value: &Value) -> Robj {
 }
 
 #[extendr]
-fn from_json(input_str: String) -> Robj {
+pub fn from_json(input_str: String) -> Robj {
     // Parse the string of data into serde_json::Value.
     let v: Value = serde_json::from_str(&input_str).unwrap();
     return extract_json_value(&v);
